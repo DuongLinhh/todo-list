@@ -13,4 +13,5 @@ Step 3: Go To the Project Directory and Run:
 Step 4: Start the development server by running the following command:
 ### `npm start`
 
-
+A new browser window should open with your React application running at 
+### `http://localhost:3000/`
