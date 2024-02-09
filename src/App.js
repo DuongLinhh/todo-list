@@ -11,7 +11,7 @@ const App = () => {
   // add new task
   const newTask = (name) => {
     const newTask = {
-      list: name,
+      name,
       id: Date.now(),
       isCheck: false,
       isEdit: false
