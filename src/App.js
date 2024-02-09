@@ -7,6 +7,7 @@ import CountItem from "./components/CountItem";
 
 const App = () => {
   const [toDoList, setTodo] = useState([]);
+  const [edit, setEdit] = useState();
 
   // add new task
   const newTask = (name) => {
@@ -18,31 +19,45 @@ const App = () => {
     };
     setTodo([...toDoList, newTask]);
   }
+
+  // update new task
+  const updateTask = (name, id) => {
+    const i = toDoList.findIndex((item) => item.id === id);
+    if (i !== -1 ) {
+      toDoList[i].name = name;
+      setTodo([...toDoList]);
+      setEdit(null);
+    }
+  }
+
   
   // delete task
-  const deteleTask = (deleteTaskName) => {
-    setTodo(toDoList.filter((task) => task.name !== deleteTaskName));
+  const deteleTask = (deleteTaskId) => {
+    setTodo(toDoList.filter((task) => task.id !== deleteTaskId));
+    setEdit(null);
   }
 
   //togglecheck complete task
-  const checkTask = (taskName) => {
+  const checkTask = (taskId) => {
     setTodo((prev) => prev.map((task) => 
-      task.name === taskName ? {...task,
+      task.id === taskId ? {...task,
       isCheck: !task.isCheck } : task,
     ))
   }
 
   //handle edit task
-  const editTask = (name) => {
-    const editTask = toDoList.map((item) => item.name === name ? {...toDoList, isEdit: !toDoList.isEdit} : toDoList);
-    setTodo(editTask);
+  const editTask = (id) => {
+    const editTask = toDoList.find((item) => item.id === id);
+    setEdit(editTask);
   }
 
   return (
     <>
       <div className="container">
         <h1>Todo List</h1>
-        <InputBox newTask={newTask}/>
+        <InputBox newTask={newTask} editTask={edit}
+                updateTask={updateTask}
+        />
         <div className="toDoList">
           <span>List tasks</span>
           <ul className="list-items">

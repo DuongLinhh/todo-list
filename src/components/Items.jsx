@@ -8,7 +8,7 @@ const Items = ({ task, deleteTask, checkTask, editTask}) => {
             <input 
                 type="checkbox" 
                 checked={task.isCheck}
-                onChange={() => checkTask(task.name)}
+                onChange={() => checkTask(task.id)}
             />
             <p className={task.isCheck ? 'isChecked' : 'task-name'}>{task.name}</p>
         </div>
@@ -17,7 +17,7 @@ const Items = ({ task, deleteTask, checkTask, editTask}) => {
           onClick={() => editTask(task.id)}
         />
         <MdDelete className="delete-icon"
-            onClick={() => deleteTask(task.name)}
+            onClick={() => deleteTask(task.id)}
         />
     </li>
   )
